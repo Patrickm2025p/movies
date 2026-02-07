@@ -1,0 +1,308 @@
+.premium-page {
+  min-height: 80vh;
+  color: white;
+}
+
+.premium-hero {
+  background: linear-gradient(135deg, #e50914 0%, #831010 100%);
+  padding: 80px 30px 60px;
+  text-align: center;
+}
+
+.premium-hero h1 {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.premium-hero p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+.premium-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 30px;
+  position: relative;
+}
+
+.premium-content::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(45deg, #141414 25%, transparent 25%),
+    linear-gradient(-45deg, #141414 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #141414 75%),
+    linear-gradient(-45deg, transparent 75%, #141414 75%);
+  background-size: 60px 60px;
+  background-position: 0 0, 0 30px, 30px -30px, -30px 0px;
+  opacity: 0.1;
+  animation: movieScreen 20s linear infinite;
+  z-index: -1;
+  pointer-events: none;
+}
+
+@keyframes movieScreen {
+  0% {
+    background-position: 0 0, 0 30px, 30px -30px, -30px 0px;
+  }
+  100% {
+    background-position: 60px 60px, 60px 90px, 90px 30px, 30px 60px;
+  }
+}
+
+.premium-status {
+  text-align: center;
+  background: #1a1a1a;
+  padding: 40px;
+  border-radius: 10px;
+  margin-bottom: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.premium-status::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(45deg, #141414 25%, transparent 25%),
+    linear-gradient(-45deg, #141414 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #141414 75%),
+    linear-gradient(-45deg, transparent 75%, #141414 75%);
+  background-size: 60px 60px;
+  background-position: 0 0, 0 30px, 30px -30px, -30px 0px;
+  opacity: 0.1;
+  animation: movieScreen 20s linear infinite;
+  z-index: 0;
+  pointer-events: none;
+}
+
+@keyframes movieScreen {
+  0% {
+    background-position: 0 0, 0 30px, 30px -30px, -30px 0px;
+  }
+  100% {
+    background-position: 60px 60px, 60px 90px, 90px 30px, 30px 60px;
+  }
+}
+
+.premium-status h2 {
+  color: #4caf50;
+  font-size: 2rem;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.premium-status p {
+  position: relative;
+  z-index: 1;
+}
+
+.premium-actions {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.action-btn {
+  padding: 15px 40px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: transform 0.3s;
+}
+
+.action-btn:hover {
+  transform: translateY(-3px);
+}
+
+.action-btn.watch {
+  background: #e50914;
+  color: white;
+}
+
+.action-btn.download {
+  background: #4caf50;
+  color: white;
+}
+
+.premium-features {
+  background: #1a1a1a;
+  padding: 30px;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.premium-features::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(45deg, #141414 25%, transparent 25%),
+    linear-gradient(-45deg, #141414 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #141414 75%),
+    linear-gradient(-45deg, transparent 75%, #141414 75%);
+  background-size: 60px 60px;
+  background-position: 0 0, 0 30px, 30px -30px, -30px 0px;
+  opacity: 0.1;
+  animation: movieScreen 20s linear infinite;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.premium-features h3 {
+  color: #e50914;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.premium-features ul {
+  list-style: none;
+  padding: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.premium-features li {
+  padding: 10px 0;
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+.premium-plans {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.plan-card {
+  background: #1a1a1a;
+  padding: 40px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 400px;
+  border: 2px solid #e50914;
+  position: relative;
+  overflow: hidden;
+}
+
+.plan-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(229, 9, 20, 0.3), transparent);
+  animation: waterWave 6s linear infinite;
+}
+
+.plan-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(-45deg, transparent, rgba(76, 175, 80, 0.2), transparent);
+  animation: waterWave 8s linear infinite reverse;
+}
+
+@keyframes waterWave {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.plan-card h3 {
+  color: #e50914;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 10;
+}
+
+.plan-price {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #4caf50;
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 10;
+}
+
+.plan-price span {
+  font-size: 1.2rem;
+  opacity: 0.8;
+}
+
+.plan-card ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 10;
+}
+
+.plan-card li {
+  padding: 12px 0;
+  border-bottom: 1px solid #333;
+}
+
+.subscribe-btn {
+  width: 100%;
+  padding: 15px;
+  background: #e50914;
+  border: none;
+  color: white;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  z-index: 10;
+}
+
+.subscribe-btn:hover {
+  background: #c40812;
+}
+
+@media (max-width: 768px) {
+  .premium-hero h1 {
+    font-size: 2rem;
+  }
+  
+  .premium-actions {
+    flex-direction: column;
+  }
+  
+  .action-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

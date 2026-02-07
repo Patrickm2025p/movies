@@ -1,14 +1,28 @@
-import React from "react";
-import MovieRow from "../composants/MovieRow/MovieRow";
+import React, { useState } from "react";
+import ActorsHero from "../composants/ActorsHero/ActorsHero";
+import ActorRow from "../composants/ActorRow/ActorRow";
+import ActorModal from "../composants/ActorModal/ActorModal";
+import Footer from "../composants/footer/footer";
 
-function People({ onSelectMovie }) {
+function People() {
+  const [selectedActor, setSelectedActor] = useState(null);
+
   return (
     <>
-      <MovieRow
+      <ActorsHero />
+      <ActorRow
         title="Popular Stars"
         fetchUrl="popularPeople"
-        onSelectMovie={onSelectMovie}
+        onSelectActor={setSelectedActor}
       />
+      
+      {selectedActor && (
+        <ActorModal
+          actor={selectedActor}
+          onClose={() => setSelectedActor(null)}
+        />
+      )}
+      <Footer />
     </>
   );
 }

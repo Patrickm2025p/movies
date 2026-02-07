@@ -1,0 +1,48 @@
+.sidebar {
+  position: sticky;
+  top: 80px;
+  width: 250px;
+  height: fit-content;
+  padding: 20px;
+  background: #1a1a1a;
+  border-radius: 8px;
+  margin-left: 20px;
+}
+
+.ad-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ad-box {
+  background: linear-gradient(135deg, #e50914 0%, #831010 100%);
+  padding: 30px 20px;
+  border-radius: 8px;
+  text-align: center;
+  color: white;
+  transition: transform 0.3s;
+  text-decoration: none;
+  display: block;
+  cursor: pointer;
+}
+
+.ad-box:hover {
+  transform: translateY(-5px);
+}
+
+.ad-box h3 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.ad-box p {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+@media (max-width: 1024px) {
+  .sidebar {
+    display: none;
+  }
+}

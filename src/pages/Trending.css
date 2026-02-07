@@ -1,0 +1,56 @@
+.trending-page {
+  min-height: 80vh;
+  color: white;
+}
+
+.trending-hero {
+  background: linear-gradient(135deg, #ff6b00 0%, #ff8c00 100%);
+  padding: 80px 30px 60px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.trending-hero::before {
+  content: '🔥';
+  position: absolute;
+  font-size: 15rem;
+  opacity: 0.1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+.trending-hero h1 {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  position: relative;
+  z-index: 1;
+}
+
+.trending-hero p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  position: relative;
+  z-index: 1;
+}
+
+.trending-content {
+  padding: 40px 0;
+}
+
+@media (max-width: 768px) {
+  .trending-hero h1 {
+    font-size: 2rem;
+  }
+}

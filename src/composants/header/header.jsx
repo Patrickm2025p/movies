@@ -1,13 +1,38 @@
 import React, { useState, useEffect } from "react";
-import "./Header.css";
+import "./header.css";
 import logo from "../../assets/react.svg";
-import { FaSearch, FaBars, FaTimes } from "react-icons/fa";
-import { Link } from "react-router"; // ✅ AJOUT ROUTER
+import { FaSearch, FaBars, FaTimes, FaUser, FaSignOutAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 function Header({ setSearch }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [scrolled, setScrolled] = useState(false);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const userData = JSON.parse(localStorage.getItem("user"));
+    setUser(userData);
+
+    const handleStorageChange = () => {
+      const updatedUser = JSON.parse(localStorage.getItem("user"));
+      setUser(updatedUser);
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    window.addEventListener("userLogin", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener("userLogin", handleStorageChange);
+    };
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    setUser(null);
+    window.location.href = "/";
+  };
 
   /* Debounce search */
   useEffect(() => {
@@ -40,22 +65,11 @@ function Header({ setSearch }) {
 
   return (
     <>
-      <header className={`app-header ${scrolled ? "scrolled" : ""}`}>
-        <img src={logo} alt="Logo" className="logo" />
-
-        {/* Desktop search */}
-        <div className="search-container desktop-search">
-          <FaSearch />
-          <input
-            type="text"
-            placeholder="Search movies..."
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-          />
-        </div>
+      <header className={`app-header ${scrolled ? "scrolled" : ""}`} role="banner">
+        <img src={logo} alt="SkyMovie Logo" className="logo" />
 
         {/* Desktop nav */}
-        <nav className="desktop-nav">
+        <nav className="desktop-nav" aria-label="Main navigation">
           <ul>
             {[
               { name: "Home", path: "/" },
@@ -64,40 +78,73 @@ function Header({ setSearch }) {
               { name: "People", path: "/people" },
             ].map((item) => (
               <li key={item.name}>
-                {/* ✅ ROUTER LINK */}
                 <Link to={item.path}>{item.name}</Link>
               </li>
             ))}
           </ul>
         </nav>
 
-        {/* Mobile menu icon */}
-        <div className="menu-icon" onClick={() => setMenuOpen(true)}>
-          <FaBars />
+        {/* Desktop search */}
+        <div className="search-container desktop-search">
+          <FaSearch aria-hidden="true" />
+          <input
+            type="text"
+            placeholder="Search movies..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            aria-label="Search movies"
+          />
         </div>
+
+        {/* User section */}
+        {user && (
+          <div className="user-section">
+            <span className="user-name">
+              <FaUser /> {user.name}
+            </span>
+            <button className="logout-btn" onClick={handleLogout} aria-label="Logout">
+              <FaSignOutAlt /> Logout
+            </button>
+          </div>
+        )}
+
+        {/* Mobile menu icon */}
+        <button 
+          className="menu-icon" 
+          onClick={() => setMenuOpen(true)}
+          aria-label="Open menu"
+          aria-expanded={menuOpen}
+        >
+          <FaBars />
+        </button>
       </header>
 
       {/* Overlay */}
       <div
         className={`overlay ${menuOpen ? "show" : ""}`}
         onClick={() => setMenuOpen(false)}
+        aria-hidden={!menuOpen}
       />
 
       {/* Mobile nav */}
-      <nav className={`mobile-nav ${menuOpen ? "open" : ""}`}>
-        <FaTimes
+      <nav className={`mobile-nav ${menuOpen ? "open" : ""}`} aria-label="Mobile navigation">
+        <button
           className="close-icon"
           onClick={() => setMenuOpen(false)}
-        />
+          aria-label="Close menu"
+        >
+          <FaTimes />
+        </button>
 
         {/* Mobile search */}
         <div className="search-container mobile-search">
-          <FaSearch />
+          <FaSearch aria-hidden="true" />
           <input
             type="text"
             placeholder="Search movies..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
+            aria-label="Search movies"
           />
         </div>
 
@@ -109,7 +156,6 @@ function Header({ setSearch }) {
             { name: "People", path: "/people" },
           ].map((item) => (
             <li key={item.name}>
-              {/* ✅ ROUTER LINK + close menu */}
               <Link
                 to={item.path}
                 onClick={() => setMenuOpen(false)}
@@ -119,6 +165,17 @@ function Header({ setSearch }) {
             </li>
           ))}
         </ul>
+
+        {user && (
+          <div className="mobile-user-section">
+            <div className="mobile-user-name">
+              <FaUser /> {user.name}
+            </div>
+            <button className="mobile-logout-btn" onClick={handleLogout}>
+              <FaSignOutAlt /> Logout
+            </button>
+          </div>
+        )}
       </nav>
     </>
   );

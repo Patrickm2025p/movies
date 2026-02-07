@@ -1,0 +1,58 @@
+.actor-modal {
+  max-width: 1100px;
+}
+
+.actor-modal-photo {
+  width: 300px;
+  height: auto;
+  border-radius: 8px;
+  flex-shrink: 0;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.actor-biography {
+  margin-top: 20px;
+}
+
+.actor-biography h3 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  color: #e50914;
+}
+
+.actor-biography p {
+  line-height: 1.7;
+  text-align: justify;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.actor-aliases {
+  margin-top: 20px;
+}
+
+.actor-aliases h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #e50914;
+}
+
+.actor-aliases ul {
+  list-style: none;
+  padding: 0;
+}
+
+.actor-aliases li {
+  padding: 5px 0;
+  opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+  .actor-modal-photo {
+    width: 200px;
+  }
+  
+  .actor-biography p {
+    max-height: 200px;
+  }
+}

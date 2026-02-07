@@ -1,20 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 import { tmdb } from "../../services/tmdb";
 import "./MovieCard.css";
 
-function MovieCard({ movie, onClick }) {
+const trailerCache = new Map();
+
+const MovieCard = memo(({ movie, onClick }) => {
   const [trailerKey, setTrailerKey] = useState(null);
   const [showTrailer, setShowTrailer] = useState(false);
 
   const fetchTrailer = async () => {
     if (trailerKey) return;
+    if (trailerCache.has(movie.id)) {
+      setTrailerKey(trailerCache.get(movie.id));
+      return;
+    }
 
-    const res = await tmdb.get(`/movie/${movie.id}/videos`);
-    const trailer = res.data.results.find(
-      (vid) => vid.type === "Trailer" && vid.site === "YouTube"
-    );
+    try {
+      const res = await tmdb.get(`/movie/${movie.id}/videos`);
+      const trailer = res.data.results.find(
+        (vid) => vid.type === "Trailer" && vid.site === "YouTube"
+      );
 
-    if (trailer) setTrailerKey(trailer.key);
+      if (trailer) {
+        trailerCache.set(movie.id, trailer.key);
+        setTrailerKey(trailer.key);
+      }
+    } catch (err) {
+      console.error("Failed to fetch trailer:", err);
+    }
   };
 
   return (
@@ -30,7 +43,8 @@ function MovieCard({ movie, onClick }) {
       {!showTrailer && movie.poster_path && (
         <img
           src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
-          alt={movie.title}
+          alt={movie.title || movie.name || "Movie poster"}
+          loading="lazy"
         />
       )}
 
@@ -38,11 +52,13 @@ function MovieCard({ movie, onClick }) {
         <iframe
           src={`https://www.youtube.com/embed/${trailerKey}?autoplay=1&mute=1`}
           allow="autoplay"
-          title={movie.title}
+          title={movie.title || movie.name}
         />
       )}
     </div>
   );
-}
+});
+
+MovieCard.displayName = "MovieCard";
 
 export default MovieCard;

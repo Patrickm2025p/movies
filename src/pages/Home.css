@@ -1,0 +1,16 @@
+.page-layout {
+  display: flex;
+  gap: 20px;
+  max-width: 100%;
+}
+
+.main-content {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 1024px) {
+  .page-layout {
+    flex-direction: column;
+  }
+}
